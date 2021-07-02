@@ -42,16 +42,16 @@ Valid for Lisk-Core 3 ONLY!
 
 ## Snapshot
 
-* [LiskNode.io](https://testnet3-snapshot.lisknode.io/)
+* [Gr33nDrag0n - testnet3-snapshot.lisknode.io](https://testnet3-snapshot.lisknode.io/)
 
 ## Public API Endpoints
 
-* [LiskNode.io](https://testnet3-api.lisknode.io/)
-* [Lemii - LiskTools.eu](https://testnet-api.lisktools.eu/)
+* Gr33nDrag0n - https://testnet3-api.lisknode.io/
+* Lemii - https://testnet-api.lisktools.eu/
 
 ## Public Lisk-Service API Endpoints
 
-* [LiskNode.io (SOON)](https://testnet3-service.lisknode.io/)
+* Gr33nDrag0n (SOON) - https://testnet3-service.lisknode.io/
   
 ## Scripts
 
