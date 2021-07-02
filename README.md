@@ -51,7 +51,8 @@ Valid for Lisk-Core 3 ONLY!
 
 ## Public Lisk-Service API Endpoints
 
-* Gr33nDrag0n (SOON) - https://testnet3-service.lisknode.io/
+* Lisk.io - http://testnet-service.lisk.io/api/
+* Gr33nDrag0n (SOON) - https://testnet3-service.lisknode.io/api/
   
 ## Scripts
 
