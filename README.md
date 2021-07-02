@@ -9,7 +9,8 @@ Misc. stuff related to lisk-core 3 network.
   - [My Guides](#my-guides)
   - [Explorer](#explorer)
   - [Snapshot](#snapshot)
-  - [Public API Endpoints](#public-api-endpoints)
+  - [Public HTTP API Endpoints](#public-http-api-endpoints)
+  - [Public WS API Endpoints](#public-ws-api-endpoints)
   - [Public Lisk-Service API Endpoints](#public-lisk-service-api-endpoints)
   - [Scripts](#scripts)
     - [Bash / Server](#bash--server)
@@ -44,15 +45,20 @@ Valid for Lisk-Core 3 ONLY!
 
 * [Gr33nDrag0n - testnet3-snapshot.lisknode.io](https://testnet3-snapshot.lisknode.io/)
 
-## Public API Endpoints
+## Public HTTP API Endpoints
 
 * Gr33nDrag0n - https://testnet3-api.lisknode.io/
 * Lemii - https://testnet-api.lisktools.eu/
+
+## Public WS API Endpoints
+
+* Lemii - wss://testnet-api.lisktools.eu/ws
 
 ## Public Lisk-Service API Endpoints
 
 * Lisk.io - http://testnet-service.lisk.io/api/
 * Gr33nDrag0n (SOON) - https://testnet3-service.lisknode.io/api/
+* Lemii - https://testnet-service.lisk.io/
   
 ## Scripts
 
