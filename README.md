@@ -38,7 +38,7 @@ Valid for Lisk-Core 3 ONLY!
 
 ## Explorer
 
-* [Moosty - LiskScan TestNet Explorer](https://testnet.liskscan.io/)
+* [Moosty - LiskScan TestNet Explorer](https://testnet.liskscan.com/)
 
 ## Snapshot
 
@@ -47,6 +47,7 @@ Valid for Lisk-Core 3 ONLY!
 ## Public API Endpoints
 
 * [LiskNode.io](https://testnet3-api.lisknode.io/)
+* [Lemii - LiskTools.eu](https://testnet-api.lisktools.eu/)
 
 ## Public Lisk-Service API Endpoints
 
