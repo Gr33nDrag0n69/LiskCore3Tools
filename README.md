@@ -58,7 +58,7 @@ Valid for Lisk-Core 3 ONLY!
 
 * Lisk.io - http://testnet-service.lisk.io/api/
 * Gr33nDrag0n (SOON) - https://testnet3-service.lisknode.io/api/
-* Lemii - https://testnet-service.lisk.io/
+* Lemii - https://testnet-service.lisktools.eu/
   
 ## Scripts
 
