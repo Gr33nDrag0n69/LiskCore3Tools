@@ -54,6 +54,7 @@ Valid for Lisk-Core 3 ONLY!
 ## Public WS API Endpoints
 
 * Lemii - wss://testnet-api.lisktools.eu/ws
+* punkrock - wss://lisk-testnet-api.punkrock.me/ws
 
 ## Public Lisk-Service API Endpoints
 
