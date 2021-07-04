@@ -47,18 +47,21 @@ Valid for Lisk-Core 3 ONLY!
 
 ## Public HTTP API Endpoints
 
-* Gr33nDrag0n - https://testnet3-api.lisknode.io/
-* Lemii - https://testnet-api.lisktools.eu/
+* Gr33nDrag0n - https://testnet3-api.lisknode.io
+* Lemii - https://testnet-api.lisktools.eu
+* punkrock - https://lisk-testnet-api.punkrock.me
 
 ## Public WS API Endpoints
 
 * Lemii - wss://testnet-api.lisktools.eu/ws
+* punkrock - wss://lisk-testnet-api.punkrock.me/ws
 
 ## Public Lisk-Service API Endpoints
 
-* Lisk.io - http://testnet-service.lisk.io/api/
-* Gr33nDrag0n (SOON) - https://testnet3-service.lisknode.io/api/
-* Lemii - https://testnet-service.lisktools.eu/
+* Lisk.io - http://testnet-service.lisk.io/api
+* Gr33nDrag0n (SOON) - https://testnet3-service.lisknode.io/api
+* Lemii - https://testnet-service.lisktools.eu
+* punkrock - https://lisk-testnet-service.punkrock.me
   
 ## Scripts
 
