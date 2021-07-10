@@ -67,9 +67,9 @@ Copy the address to use it as a base URL for your queries.
 Click the link to view their current status.
 
 * lisk.io - [https://testnet-service.lisk.io/api](https://testnet-service.lisk.io/api/status)
-* gr33ndrag0n (SOON) - [https://testnet3-service.lisknode.io]()
-* lemii - [https://testnet-service.lisktools.eu](https://testnet-service.lisktools.eu/status)
-* punkrock - [https://lisk-testnet-service.punkrock.me](https://lisk-testnet-service.punkrock.me/status)
+* gr33ndrag0n (SOON) - [https://testnet3-service.lisknode.io](https://testnet3-service.lisknode.io/api/status)
+* lemii - [https://testnet-service.lisktools.eu](https://testnet-service.lisktools.eu/api/status)
+* punkrock - [https://lisk-testnet-service.punkrock.me](https://lisk-testnet-service.punkrock.me/api/status)
   
 ## Scripts
 
