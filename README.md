@@ -59,8 +59,9 @@ Click the link to view the current node info.
 
 ### WS (WebSocket)
 
+* GitHubTest - [test](https://htmlpreview.github.io/?https://github.com/Gr33nDrag0n69/LiskCore3Tools/blob/ws/WS/TestWebSocket.html)
 * lisk.io - wss://testnet-service.lisk.io/rpc-v2
-* SOON gr33ndrag0n - wss://testnet3-api.lisknode.io/ws
+* gr33ndrag0n - wss://testnet3-api.lisknode.io/ws
 * lemii - wss://testnet-api.lisktools.eu/ws
 * punkrock - wss://lisk-testnet-api.punkrock.me/ws
 
