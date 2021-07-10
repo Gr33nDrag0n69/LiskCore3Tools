@@ -4,7 +4,7 @@ Misc. stuff related to lisk-core 3 network.
 
 - [Disclaimer](#disclaimer)
 - [General Links](#general-links)
-  - [Documentation](#documentation)
+  - [Lisk.io Documentation](#liskio-documentation)
 - [TestNet Links](#testnet-links)
   - [My Guides](#my-guides)
   - [Explorer](#explorer)
@@ -25,12 +25,11 @@ Valid for Lisk-Core 3 ONLY!
 
 # General Links
 
-## Documentation
+## Lisk.io Documentation
 
-* [Lisk.io - Lisk-Core Documentation](https://lisk.io/documentation/lisk-core/v3/index.html)
+* [Lisk-Core](https://lisk.io/documentation/lisk-core/v3/index.html)
   * [Lisk-Core CLI](https://lisk.io/documentation/lisk-core/v3/reference/cli.html)
-  * [Lisk-Core API](https://lisk.io/documentation/lisk-core/v3/reference/api.html)
-* [Lisk.io - Lisk-SDK Documentation](https://lisk.io/documentation/lisk-sdk/)
+* [Lisk-SDK](https://lisk.io/documentation/lisk-sdk/)
 
 # TestNet Links
 
@@ -49,6 +48,8 @@ Valid for Lisk-Core 3 ONLY!
 ## Public API Endpoints
 
 ### HTTP PlugIn
+
+**Documentation: [Lisk Core v3 API](https://lisk.io/documentation/lisk-core/v3/reference/api.html)**
 
 Copy the address to use it as a base URL for your queries.
 Click the link to view the current node info.
