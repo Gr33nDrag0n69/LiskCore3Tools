@@ -9,9 +9,10 @@ Misc. stuff related to lisk-core 3 network.
   - [My Guides](#my-guides)
   - [Explorer](#explorer)
   - [Snapshot](#snapshot)
-  - [Public HTTP API Endpoints](#public-http-api-endpoints)
-  - [Public WS API Endpoints](#public-ws-api-endpoints)
-  - [Public Lisk-Service API Endpoints](#public-lisk-service-api-endpoints)
+  - [Public API Endpoints](#public-api-endpoints)
+    - [HTTP PlugIn](#http-plugin)
+    - [WS (WebSocket)](#ws-websocket)
+    - [Lisk-Service](#lisk-service)
   - [Scripts](#scripts)
     - [Bash / Server](#bash--server)
     - [PowerShell / HTTPS API](#powershell--https-api)
@@ -39,28 +40,32 @@ Valid for Lisk-Core 3 ONLY!
 
 ## Explorer
 
-* [Moosty - LiskScan TestNet Explorer](https://testnet.liskscan.com/)
+* [moosty - LiskScan TestNet Explorer](https://testnet.liskscan.com/)
 
 ## Snapshot
 
-* [Gr33nDrag0n - testnet3-snapshot.lisknode.io](https://testnet3-snapshot.lisknode.io/)
+* [gr33ndrag0n - testnet3-snapshot.lisknode.io](https://testnet3-snapshot.lisknode.io/)
 
-## Public HTTP API Endpoints
+## Public API Endpoints
 
-* Gr33nDrag0n - https://testnet3-api.lisknode.io
-* Lemii - https://testnet-api.lisktools.eu
+### HTTP PlugIn
+
+* gr33ndrag0n - https://testnet3-api.lisknode.io
+* lemii - https://testnet-api.lisktools.eu
 * punkrock - https://lisk-testnet-api.punkrock.me
 
-## Public WS API Endpoints
+### WS (WebSocket)
 
-* Lemii - wss://testnet-api.lisktools.eu/ws
+* lisk.io - wss://testnet-service.lisk.io/rpc-v2
+* gr33ndrag0n (SOON) - wss://testnet3-api.lisknode.io/ws
+* lemii - wss://testnet-api.lisktools.eu/ws
 * punkrock - wss://lisk-testnet-api.punkrock.me/ws
 
-## Public Lisk-Service API Endpoints
+### Lisk-Service
 
-* Lisk.io - http://testnet-service.lisk.io/api
-* Gr33nDrag0n (SOON) - https://testnet3-service.lisknode.io/api
-* Lemii - https://testnet-service.lisktools.eu
+* lisk.io - http://testnet-service.lisk.io/api
+* gr33ndrag0n (SOON) - https://testnet3-service.lisknode.io
+* lemii - https://testnet-service.lisktools.eu
 * punkrock - https://lisk-testnet-service.punkrock.me
   
 ## Scripts
