@@ -84,6 +84,6 @@ Click the link to view their current status.
 
 ### PowerShell / HTTPS API
 
-* [Test Lisk-Core HTTP PlugIn API Endpoints](https://raw.githubusercontent.com/Gr33nDrag0n69/LiskCore3Tools/main/PS1/Test-LiskCoreAPI.ps1)
+* [Test Lisk-Core HTTP PlugIn API Endpoints](https://github.com/Gr33nDrag0n69/LiskCore3Tools/blob/main/PS1/Test-LiskCoreAPI.ps1)
 * SOON [Test Lisk-Core WebSocket API Endpoints]()
 * SOON [Test Lisk-Service API Endpoints]()
