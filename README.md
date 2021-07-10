@@ -59,8 +59,7 @@ Click the link to view the current node info.
 
 ### WS (WebSocket)
 
-* lisk.io - wss://testnet-service.lisk.io/rpc-v2
-* SOON gr33ndrag0n - wss://testnet3-api.lisknode.io/ws
+* gr33ndrag0n - wss://testnet3-api.lisknode.io/ws
 * lemii - wss://testnet-api.lisktools.eu/ws
 * punkrock - wss://lisk-testnet-api.punkrock.me/ws
 
