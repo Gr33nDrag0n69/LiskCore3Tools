@@ -50,14 +50,17 @@ Valid for Lisk-Core 3 ONLY!
 
 ### HTTP PlugIn
 
-* gr33ndrag0n - https://testnet3-api.lisknode.io
-* lemii - https://testnet-api.lisktools.eu
-* punkrock - https://lisk-testnet-api.punkrock.me
+Copy the address to use it as a base URL for your queries.
+Click the link to view the current node info.
+
+* gr33ndrag0n - [https://testnet3-api.lisknode.io](https://testnet3-api.lisknode.io/api/node/info)
+* lemii - [https://testnet-api.lisktools.eu](https://testnet-api.lisktools.eu/api/node/info)
+* punkrock - [https://lisk-testnet-api.punkrock.me](https://lisk-testnet-api.punkrock.me/api/node/info)
 
 ### WS (WebSocket)
 
 * lisk.io - wss://testnet-service.lisk.io/rpc-v2
-* gr33ndrag0n (SOON) - wss://testnet3-api.lisknode.io/ws
+* SOON gr33ndrag0n - wss://testnet3-api.lisknode.io/ws
 * lemii - wss://testnet-api.lisktools.eu/ws
 * punkrock - wss://lisk-testnet-api.punkrock.me/ws
 
@@ -67,7 +70,7 @@ Copy the address to use it as a base URL for your queries.
 Click the link to view their current status.
 
 * lisk.io - [https://testnet-service.lisk.io/api](https://testnet-service.lisk.io/api/status)
-* gr33ndrag0n (SOON) - [https://testnet3-service.lisknode.io](https://testnet3-service.lisknode.io/api/status)
+* SOON gr33ndrag0n - [https://testnet3-service.lisknode.io](https://testnet3-service.lisknode.io/api/status)
 * lemii - [https://testnet-service.lisktools.eu](https://testnet-service.lisktools.eu/api/status)
 * punkrock - [https://lisk-testnet-service.punkrock.me](https://lisk-testnet-service.punkrock.me/api/status)
   
@@ -81,4 +84,6 @@ Click the link to view their current status.
 
 ### PowerShell / HTTPS API
 
-* [Test Lisk-Core API Endpoints](https://raw.githubusercontent.com/Gr33nDrag0n69/LiskCore3Tools/main/PS1/Test-LiskCoreAPI.ps1)
+* [Test Lisk-Core HTTP PlugIn API Endpoints](https://raw.githubusercontent.com/Gr33nDrag0n69/LiskCore3Tools/main/PS1/Test-LiskCoreAPI.ps1)
+* SOON [Test Lisk-Core WebSocket API Endpoints]()
+* SOON [Test Lisk-Service API Endpoints]()
