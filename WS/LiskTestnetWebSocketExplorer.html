@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <title>Lisk Testnet WebSocket Explorer</title>
+
+<script language="javascript" type="text/javascript">
+
+var server;
+var command;
+var message;
+var response;
+var websocket;
+
+function btnSendCommandClick()
+{
+  server = document.getElementById("server").value
+  command = document.getElementById("command").value
+  message = document.getElementById("message");
+  message.innerHTML = '';
+  response = document.getElementById("response");
+
+  WriteMessage("Opening New WebSocket on " + server);
+  websocket = new WebSocket(server);
+  websocket.onopen = function(evt) { onOpen(evt) };
+  websocket.onclose = function(evt) { onClose(evt) };
+  websocket.onmessage = function(evt) { onMessage(evt) };
+  websocket.onerror = function(evt) { onError(evt) };
+}
+
+function onOpen(evt)
+{
+  WriteMessage("WebSocket Opened");
+
+  WriteMessage("Sending Command:" + command);
+  websocket.send(command);
+}
+
+function onClose(evt)
+{
+  WriteMessage("WebSocket Closed");
+}
+
+function onMessage(evt)
+{
+  WriteMessage("Command Response Received");
+
+  WriteMessage("Parsing Json Response");
+  var jsonobject = JSON.parse(evt.data, undefined, 4)
+
+  WriteMessage("Updating Json Response");
+  document.getElementById("response").innerHTML =  FormatJsonResponse(jsonobject)
+
+  WriteMessage("Closing WebSocket");
+  websocket.close();
+}
+
+function onError(evt)
+{
+  WriteMessage('<span style="color: red;">ERROR:</span> ' + evt.data);
+}
+
+//-----------------------------------------------------------------------------
+
+function WriteMessage(msg)
+{
+  var pre = document.createElement("div");
+  pre.style.wordWrap = "break-word";
+  pre.innerHTML = msg;
+  message.appendChild(pre);
+}
+
+//-----------------------------------------------------------------------------
+
+function FormatJsonResponse(json) {
+  if (typeof json != 'string') {
+        json = JSON.stringify(json, undefined, 2);
+  }
+  json = json.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  return json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, function (match) {
+      var cls = 'number';
+      if (/^"/.test(match)) {
+          if (/:$/.test(match)) {
+              cls = 'key';
+          } else {
+              cls = 'string';
+          }
+      } else if (/true|false/.test(match)) {
+          cls = 'boolean';
+      } else if (/null/.test(match)) {
+          cls = 'null';
+      }
+      return '<span class="' + cls + '">' + match + '</span>';
+  });
+}
+
+//-----------------------------------------------------------------------------
+
+</script>
+<style>
+pre {outline: 1px solid #ccc; padding: 5px; margin: 5px; }
+.string { color: green; }
+.number { color: darkorange; }
+.boolean { color: blue; }
+.null { color: magenta; }
+.key { color: red; }
+</style>
+</head>
+<body style="background-color: #4DA8DA">
+
+<!--
+Dark Blue: #12232E
+Lighter Blue: #007CC7
+Lightest Blue: #4DA8DA
+Shadow of Dark Blue: #203647
+Shadow of Light Blue: #EEFBFB
+-->
+
+<div class="container">
+    <div class="row justify-content-md-center">
+      <div class="col-md-auto">
+        <br/><h1 style="color: #12232E"><b>Lisk Testnet WebSocket Explorer</b></h1><br/>
+        <br/>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col col-lg-3">
+        <h3 style="color: #12232E; font-weight: bold;">Target Server :</h3><br/>
+      </div>
+      <div class="col">
+        <select name="server" id="server" class="form-select">
+          <option value="wss://testnet3-websocket.lisknode.io/" selected>wss://testnet3-websocket.lisknode.io/ - gr33ndrag0n</option>
+          <option value="wss://lisk-testnet-api.punkrock.me/ws">wss://lisk-testnet-api.punkrock.me/ws - punkrock</option>
+          <option value="wss://testnet-api.lisktools.eu/ws">wss://testnet-api.lisktools.eu/ws - lemii</option>
+        </select>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col col-lg-3">
+        <h3 style="color: #12232E; font-weight: bold;">Command :</h3><br/>
+      </div>
+      <div class="col">
+        <input name="command" id="command" class="form-control" type="text" value='{"jsonrpc":"2.0","id":1,"method":"app:getNodeInfo","params":{}}'>
+      </div>
+    </div>
+    <div class="row justify-content-md-center">
+      <div class="col-md-auto">
+        <button class="btn btn-dark btn-large" onclick="btnSendCommandClick()"><h5 style="font-weight: bold;">Send Command</h5></button><br/>
+        <br/>
+        <br/>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="card text-white bg-dark mb-3">
+      <div class="card-header">
+        <h3 style="font-weight: bold;">Message</h3>
+      </div>
+      <div class="card-body">
+        <pre id="message"></pre>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="card text-black bg-light mb-3">
+      <div class="card-header">
+        <h3 style="font-weight: bold;">Json Response</h3>
+      </div>
+      <div class="card-body">
+        <pre id="response"></pre>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="row justify-content-md-center">
+      <div class="col-md-auto">
+        <br/>
+        <h5 style="color: #12232E; font-weight: bold;"><a href="" target="_blank" style="color: #1d4b69;">GitHub Source</a> / <a href="https://lisk.com/documentation/lisk-service/references/rpc-api.html" target="_blank" style="color: #1d4b69;">WebSocket Documentation</a></h5>
+      </div>
+    </div>
+    <div class="row justify-content-md-center">
+      <div class="col-md-auto">
+        <h5 style="color: #12232E; font-weight: bold;">gr33ndrag0n v1.0.0</h5><br/>
+      </div>
+    </div>
+  </div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+</body>
+</html>

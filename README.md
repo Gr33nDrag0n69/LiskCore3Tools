@@ -4,7 +4,7 @@ Misc. stuff related to lisk-core 3 network.
 
 - [Disclaimer](#disclaimer)
 - [General Links](#general-links)
-  - [Documentation](#documentation)
+  - [Lisk.io Documentation](#liskio-documentation)
 - [TestNet Links](#testnet-links)
   - [My Guides](#my-guides)
   - [Explorer](#explorer)
@@ -14,8 +14,9 @@ Misc. stuff related to lisk-core 3 network.
     - [WS (WebSocket)](#ws-websocket)
     - [Lisk-Service](#lisk-service)
   - [Scripts](#scripts)
-    - [Bash / Server](#bash--server)
-    - [PowerShell / HTTPS API](#powershell--https-api)
+    - [Online Tool](#online-tool)
+    - [Bash](#bash)
+    - [PowerShell](#powershell)
 
 # Disclaimer
 
@@ -25,12 +26,11 @@ Valid for Lisk-Core 3 ONLY!
 
 # General Links
 
-## Documentation
+## Lisk.io Documentation
 
-* [Lisk.io - Lisk-Core Documentation](https://lisk.io/documentation/lisk-core/v3/index.html)
+* [Lisk-Core](https://lisk.io/documentation/lisk-core/v3/index.html)
   * [Lisk-Core CLI](https://lisk.io/documentation/lisk-core/v3/reference/cli.html)
-  * [Lisk-Core API](https://lisk.io/documentation/lisk-core/v3/reference/api.html)
-* [Lisk.io - Lisk-SDK Documentation](https://lisk.io/documentation/lisk-sdk/)
+* [Lisk-SDK](https://lisk.io/documentation/lisk-sdk/)
 
 # TestNet Links
 
@@ -50,6 +50,8 @@ Valid for Lisk-Core 3 ONLY!
 
 ### HTTP PlugIn
 
+**Documentation: [Lisk Core v3 API](https://lisk.io/documentation/lisk-core/v3/reference/api.html)**
+
 Copy the address to use it as a base URL for your queries.
 Click the link to view the current node info.
 
@@ -59,7 +61,7 @@ Click the link to view the current node info.
 
 ### WS (WebSocket)
 
-* gr33ndrag0n - wss://testnet3-api.lisknode.io/ws
+* gr33ndrag0n - wss://testnet3-websocket.lisknode.io/
 * lemii - wss://testnet-api.lisktools.eu/ws
 * punkrock - wss://lisk-testnet-api.punkrock.me/ws
 
@@ -75,14 +77,17 @@ Click the link to view their current status.
   
 ## Scripts
 
-### Bash / Server
+### Online Tool
+
+* [Lisk Testnet WebSocket Explorer](https://testnet3-wsexplorer.lisknode.io/)
+
+### Bash
 
 * [Enable Delegate Forging](https://raw.githubusercontent.com/Gr33nDrag0n69/LiskCore3Tools/main/SH/lisk-enable-forging.sh)
 * [Create Snapshot](https://raw.githubusercontent.com/Gr33nDrag0n69/LiskCore3Tools/main/SH/lisk-create-snapshot.sh)
 * [Rebuild From Snapshot](https://raw.githubusercontent.com/Gr33nDrag0n69/LiskCore3Tools/main/SH/lisk-rebuild.sh)
 
-### PowerShell / HTTPS API
+### PowerShell
 
-* [Test Lisk-Core HTTP PlugIn API Endpoints](https://github.com/Gr33nDrag0n69/LiskCore3Tools/blob/main/PS1/Test-LiskCoreAPI.ps1)
-* SOON [Test Lisk-Core WebSocket API Endpoints]()
-* SOON [Test Lisk-Service API Endpoints]()
+* [Test HTTP API PlugIn](https://github.com/Gr33nDrag0n69/LiskCore3Tools/blob/main/PS1/Test-LiskCoreAPI.ps1)
+* SOON [Test Lisk-Service]()
