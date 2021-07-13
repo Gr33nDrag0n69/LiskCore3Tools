@@ -14,8 +14,9 @@ Misc. stuff related to lisk-core 3 network.
     - [WS (WebSocket)](#ws-websocket)
     - [Lisk-Service](#lisk-service)
   - [Scripts](#scripts)
-    - [Bash / Server](#bash--server)
-    - [PowerShell / HTTPS API](#powershell--https-api)
+    - [Online Tool](#online-tool)
+    - [Bash](#bash)
+    - [PowerShell](#powershell)
 
 # Disclaimer
 
@@ -76,14 +77,17 @@ Click the link to view their current status.
   
 ## Scripts
 
-### Bash / Server
+### Online Tool
+
+* [Lisk Testnet WebSocket Explorer](https://testnet3-wsexplorer.lisknode.io/)
+
+### Bash
 
 * [Enable Delegate Forging](https://raw.githubusercontent.com/Gr33nDrag0n69/LiskCore3Tools/main/SH/lisk-enable-forging.sh)
 * [Create Snapshot](https://raw.githubusercontent.com/Gr33nDrag0n69/LiskCore3Tools/main/SH/lisk-create-snapshot.sh)
 * [Rebuild From Snapshot](https://raw.githubusercontent.com/Gr33nDrag0n69/LiskCore3Tools/main/SH/lisk-rebuild.sh)
 
-### PowerShell / HTTPS API
+### PowerShell
 
-* [Test Lisk-Core HTTP PlugIn API Endpoints](https://github.com/Gr33nDrag0n69/LiskCore3Tools/blob/main/PS1/Test-LiskCoreAPI.ps1)
-* SOON [Test Lisk-Core WebSocket API Endpoints]()
-* SOON [Test Lisk-Service API Endpoints]()
+* [Test HTTP API PlugIn](https://github.com/Gr33nDrag0n69/LiskCore3Tools/blob/main/PS1/Test-LiskCoreAPI.ps1)
+* SOON [Test Lisk-Service]()
