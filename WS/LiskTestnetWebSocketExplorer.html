@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <title>Lisk Testnet WebSocket Explorer</title>
+
+<script language="javascript" type="text/javascript">
+
+var server;
+var command;
+var message;
+var response;
+var websocket;
+
+function btnSendCommandClick()
+{
+  server = document.getElementById("server").value
+  command = document.getElementById("command").value
+  message = document.getElementById("message");
+  message.innerHTML = '';
+  response = document.getElementById("response");
+
+  WriteMessage("Opening New WebSocket on " + server);
+  websocket = new WebSocket(server);
+  websocket.onopen = function(evt) { onOpen(evt) };
+  websocket.onclose = function(evt) { onClose(evt) };
+  websocket.onmessage = function(evt) { onMessage(evt) };
+  websocket.onerror = function(evt) { onError(evt) };
+}
+
+function onOpen(evt)
+{
+  WriteMessage("WebSocket Opened");
+
+  WriteMessage("Sending Command:" + command);
+  websocket.send(command);
+}
+
+function onClose(evt)
+{
+  WriteMessage("WebSocket Closed");
+}
+
+function onMessage(evt)
+{
+  WriteMessage("Command Response Received");
+
+  WriteMessage("Parsing Json Response");
+  var jsonobject = JSON.parse(evt.data, undefined, 4)
+
+  WriteMessage("Updating Json Response");
+  document.getElementById("response").innerHTML =  FormatJsonResponse(jsonobject)
+
+  WriteMessage("Closing WebSocket");
+  websocket.close();
+}
+
+function onError(evt)
+{
+  WriteMessage('<span style="color: red;">ERROR:</span> ' + evt.data);
+}
+
+//-----------------------------------------------------------------------------
+
+function WriteMessage(msg)
+{
+  var pre = document.createElement("div");
+  pre.style.wordWrap = "break-word";
+  pre.innerHTML = msg;
+  message.appendChild(pre);
+}
+
+//-----------------------------------------------------------------------------
+
+function FormatJsonResponse(json) {
+  if (typeof json != 'string') {
+        json = JSON.stringify(json, undefined, 2);
+  }
+  json = json.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  return json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, function (match) {
+      var cls = 'number';
+      if (/^"/.test(match)) {
+          if (/:$/.test(match)) {
+              cls = 'key';
+          } else {
+              cls = 'string';
+          }
+      } else if (/true|false/.test(match)) {
+          cls = 'boolean';
+      } else if (/null/.test(match)) {
+          cls = 'null';
+      }
+      return '<span class="' + cls + '">' + match + '</span>';
+  });
+}
+
+//-----------------------------------------------------------------------------
+
+</script>
+<style>
+pre {outline: 1px solid #ccc; padding: 5px; margin: 5px; }
+.string { color: green; }
+.number { color: darkorange; }
+.boolean { color: blue; }
+.null { color: magenta; }
+.key { color: red; }
+</style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="row justify-content-md-center">
+      <div class="col-md-auto">
+        <br/><h1><b>Lisk Testnet WebSocket Explorer</b></h1><br/>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="row justify-content-md-center">
+      <div class="col-md-auto">
+        <br/>
+        <h4><b><a href="https://lisk.com/documentation/lisk-service/references/rpc-api.html" target="_blank">WS Documentation</a></b></h4><br/>
+        <br/>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col col-lg-3">
+        <br/><h3>Target Server :</h3><br/>
+      </div>
+      <div class="col">
+        <br/>
+        <select name="server" id="server" class="form-select">
+          <option value="wss://testnet3-websocket.lisknode.io/" selected>wss://testnet3-websocket.lisknode.io/ - gr33ndrag0n</option>
+          <option value="wss://lisk-testnet-api.punkrock.me/ws">wss://lisk-testnet-api.punkrock.me/ws - punkrock</option>
+          <option value="wss://testnet-api.lisktools.eu/ws">wss://testnet-api.lisktools.eu/ws - lemii</option>
+        </select>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col col-lg-3">
+        <br/><h3>Command :</h3><br/>
+      </div>
+      <div class="col">
+        <br/>
+        <input name="command" id="command" class="form-control" type="text" value='{"jsonrpc":"2.0","id":1,"method":"app:getNodeInfo","params":{}}'>
+      </div>
+    </div>
+    <div class="row justify-content-md-center">
+      <div class="col-md-auto">
+        <br/>
+        <button class="btn btn-dark" onclick="btnSendCommandClick()">Send Command</button><br/>
+        <br/>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <br/>
+    <h3>Message :</h3><br/>
+    <pre id="message"></pre><br/>
+  </div>
+
+  <div class="container">
+    <br/>
+    <h3>Json Response :</h3><br/>
+    <pre id="response"></pre><br/>
+  </div>
+
+  <div class="container">
+    <div class="row justify-content-md-center">
+      <div class="col-md-auto">
+        <br/>
+        <h4><b>gr33ndrag0n / v1.0 [2021-07-12] / <a href="" target="_blank">GitHub Source</a></b></h4><br/>
+        <br/>
+      </div>
+    </div>
+  </div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+</body>
+</html>
