@@ -60,12 +60,6 @@ Click the link to view the current node info.
 
 ### WS (WebSocket)
 
-**Documentation: [WebSocket JSON 2.0 RPC API](https://lisk.com/documentation/lisk-service/references/rpc-api.html)**
-
-Copy the address to use it as a base URL for your queries.
-Click the link to view their network info.
-
-* lisk.io - [wss://testnet-service.lisk.io/rpc-v2](https://htmlpreview.github.io/?https://github.com/Gr33nDrag0n69/LiskCore3Tools/blob/ws/WS/liskio-testnet-network-status.html)
 * gr33ndrag0n - wss://testnet3-api.lisknode.io/ws
 * lemii - wss://testnet-api.lisktools.eu/ws
 * punkrock - wss://lisk-testnet-api.punkrock.me/ws
