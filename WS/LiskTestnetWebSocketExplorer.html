@@ -110,21 +110,12 @@ pre {outline: 1px solid #ccc; padding: 5px; margin: 5px; }
 .key { color: red; }
 </style>
 </head>
-<body>
+<body style="background-color: #4DA8DA">
 
   <div class="container">
     <div class="row justify-content-md-center">
       <div class="col-md-auto">
-        <br/><h1><b>Lisk Testnet WebSocket Explorer</b></h1><br/>
-      </div>
-    </div>
-  </div>
-
-  <div class="container">
-    <div class="row justify-content-md-center">
-      <div class="col-md-auto">
-        <br/>
-        <h4><b><a href="https://lisk.com/documentation/lisk-service/references/rpc-api.html" target="_blank">WS Documentation</a></b></h4><br/>
+        <br/><h1 style="color: #12232E"><b>Lisk Testnet WebSocket Explorer</b></h1><br/>
         <br/>
       </div>
     </div>
@@ -133,10 +124,9 @@ pre {outline: 1px solid #ccc; padding: 5px; margin: 5px; }
   <div class="container">
     <div class="row">
       <div class="col col-lg-3">
-        <br/><h3>Target Server :</h3><br/>
+        <h3 style="color: #12232E; font-weight: bold;">Target Server :</h3><br/>
       </div>
       <div class="col">
-        <br/>
         <select name="server" id="server" class="form-select">
           <option value="wss://testnet3-websocket.lisknode.io/" selected>wss://testnet3-websocket.lisknode.io/ - gr33ndrag0n</option>
           <option value="wss://lisk-testnet-api.punkrock.me/ws">wss://lisk-testnet-api.punkrock.me/ws - punkrock</option>
@@ -146,40 +136,53 @@ pre {outline: 1px solid #ccc; padding: 5px; margin: 5px; }
     </div>
     <div class="row">
       <div class="col col-lg-3">
-        <br/><h3>Command :</h3><br/>
+        <h3 style="color: #12232E; font-weight: bold;">Command :</h3><br/>
       </div>
       <div class="col">
-        <br/>
         <input name="command" id="command" class="form-control" type="text" value='{"jsonrpc":"2.0","id":1,"method":"app:getNodeInfo","params":{}}'>
       </div>
     </div>
     <div class="row justify-content-md-center">
       <div class="col-md-auto">
+        <button class="btn btn-dark btn-large" onclick="btnSendCommandClick()"><h5 style="font-weight: bold;">Send Command</h5></button><br/>
         <br/>
-        <button class="btn btn-dark" onclick="btnSendCommandClick()">Send Command</button><br/>
         <br/>
       </div>
     </div>
   </div>
 
   <div class="container">
-    <br/>
-    <h3>Message :</h3><br/>
-    <pre id="message"></pre><br/>
+    <div class="card text-white bg-dark mb-3">
+      <div class="card-header">
+        <h3 style="font-weight: bold;">Message</h3>
+      </div>
+      <div class="card-body">
+        <pre id="message"></pre>
+      </div>
+    </div>
   </div>
 
   <div class="container">
-    <br/>
-    <h3>Json Response :</h3><br/>
-    <pre id="response"></pre><br/>
+    <div class="card text-black bg-light mb-3">
+      <div class="card-header">
+        <h3 style="font-weight: bold;">Json Response</h3>
+      </div>
+      <div class="card-body">
+        <pre id="response"></pre>
+      </div>
+    </div>
   </div>
 
   <div class="container">
     <div class="row justify-content-md-center">
       <div class="col-md-auto">
         <br/>
-        <h4><b>gr33ndrag0n / v1.0 [2021-07-12] / <a href="" target="_blank">GitHub Source</a></b></h4><br/>
-        <br/>
+        <h5 style="color: #12232E; font-weight: bold;"><a href="" target="_blank" style="color: #1d4b69;">GitHub Source</a> / <a href="https://lisk.com/documentation/lisk-service/references/rpc-api.html" target="_blank" style="color: #1d4b69;">WebSocket Documentation</a></h5>
+      </div>
+    </div>
+    <div class="row justify-content-md-center">
+      <div class="col-md-auto">
+        <h5 style="color: #12232E; font-weight: bold;">gr33ndrag0n v1.0.0</h5><br/>
       </div>
     </div>
   </div>
