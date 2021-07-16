@@ -4,6 +4,8 @@
 
 Lisk-Core 3 HTTP API Query Examples.
 
+[Source](https://github.com/Gr33nDrag0n69/LiskCore3Tools/blob/main/PS1/Test-LiskCoreAPI.ps1)
+
 ### HowTo Windows
 
 - Open PowerShell.
