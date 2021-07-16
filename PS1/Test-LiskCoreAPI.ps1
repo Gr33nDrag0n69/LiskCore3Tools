@@ -35,7 +35,9 @@ $Config = @{
         'aaedd508db9c33581ec406018b56b9e9dd6866ee'
         )
     PublicNode = @(
-        'https://testnet3-api.lisknode.io/'
+        'https://testnet3-api.lisknode.io/',
+        'https://testnet-api.lisktools.eu/',
+        'https://lisk-testnet-api.punkrock.me/'
     )
 }
 
