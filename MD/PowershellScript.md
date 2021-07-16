@@ -2,7 +2,7 @@
 
 ## Test-LiskCoreAPI.ps1
 
-DescriptionPlaceHolder
+Lisk-Core 3 HTTP API Query Examples.
 
 ### HowTo Windows
 
