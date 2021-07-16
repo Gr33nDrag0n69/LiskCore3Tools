@@ -1,12 +1,18 @@
 # PowerShell Scripts
 
+- [PowerShell Scripts](#powershell-scripts)
+  - [Test-LiskCoreAPI.ps1](#test-liskcoreapips1)
+    - [Windows](#windows)
+    - [Linux](#linux)
+  - [Test-LiskService.ps1](#test-liskserviceps1)
+
 ## Test-LiskCoreAPI.ps1
 
 Lisk-Core 3 HTTP API Query Examples.
 
 [Source](https://github.com/Gr33nDrag0n69/LiskCore3Tools/blob/main/PS1/Test-LiskCoreAPI.ps1)
 
-### HowTo Windows
+### Windows
 
 - Open PowerShell.
   
@@ -31,7 +37,7 @@ Lisk-Core 3 HTTP API Query Examples.
   .\Test-LiskCoreAPI.ps1
   ```
 
-### HowToLinux
+###  Linux
 
 - Install PowerShell 7 for Linux
 
