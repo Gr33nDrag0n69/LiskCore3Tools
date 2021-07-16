@@ -23,7 +23,11 @@ DescriptionPlaceHolder
 
 - Open the script with a text editor & edit the configuration section at the top.
 
-
+- Run the script.
+  
+  ```powershell
+  .\Test-LiskCoreAPI.ps1
+  ```
 
 ### HowToLinux
 
