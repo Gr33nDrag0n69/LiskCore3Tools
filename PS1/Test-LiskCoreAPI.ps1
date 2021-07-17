@@ -1,3 +1,22 @@
+<#
+.SYNOPSIS
+    Lisk-Core 3 HTTP API PowerShell POC
+
+.DESCRIPTION
+    Query Examples.
+
+.NOTES
+    Version :   1.0.0
+    Author  :   Gr33nDrag0n
+    History :   2021/07/17 - v1.0.0 Last Modification
+#>
+
+# API Documentation: https://lisk.com/documentation/lisk-core/v3/reference/api.html
+
+# Parameters ##################################################################
+
+[CmdletBinding()]
+Param()
 
 # Init. #######################################################################
 
@@ -33,6 +52,10 @@ $Config = @{
         'ce0dac5fcc3daf96bf07f0d550a26ec91a310623',
         '21119a9d117eaf3de4fe44c8470dc7ddd3b6747e',
         'aaedd508db9c33581ec406018b56b9e9dd6866ee'
+        )
+    Node = @(
+        'http://test31.lisk.n0d3.io:5678/',
+        'http://test32.lisk.n0d3.io:5678/'
         )
     PublicNode = @(
         'https://testnet3-api.lisknode.io/',
@@ -99,23 +122,48 @@ $AccountList | Format-Table
 
 ## Delegate
 
+$ForgerList = Invoke-LiskApiCall -Method Get -URI $( $Config.API + 'api/forgers' )
+
 $DelegateList = @()
 
 ForEach( $AccountBinaryAddress in $Config.Delegate ) {
 
     $Account = Invoke-LiskApiCall -Method Get -URI $( $Config.API + 'api/accounts/'+$AccountBinaryAddress )
-
-    $DelegateList += [PSCustomObject]@{
-        Name = $Account.dpos.delegate.username
-        TotalVote = $Account.dpos.delegate.totalVotesReceived / 100000000
-        ConsecutiveMissedBlocks = $Account.dpos.delegate.consecutiveMissedBlocks
-        LastForgedHeight = $Account.dpos.delegate.lastForgedHeight
+    $Forger = $ForgerList | Where-Object { $_.address -eq $AccountBinaryAddress }
     
-    }
+    $Account | Add-Member -MemberType NoteProperty -Name 'Forger' -Value $Forger
+
+    $DelegateList += $Account
 }
 
-Write-Host '# Delegate' -ForegroundColor Cyan
-$DelegateList | Format-Table
+Write-Host "# Delegate`r`n" -ForegroundColor Cyan
+$DelegateList | ConvertTo-Json -Depth 99
+Write-Host ''
+
+## Node
+
+Write-Host '# Node' -ForegroundColor Cyan
+
+$NodeList = @()
+
+ForEach( $NodeUrl in $Config.Node ) {
+
+    $Node = Invoke-LiskApiCall -Method Get -URI $( $NodeUrl + 'api/node/info' )
+    $ForgingInfo = Invoke-LiskApiCall -Method Get -URI $( $NodeUrl + 'api/forging/info' )
+
+    $NodeList += $Node | Select-Object -Property `
+                    @{Name = 'URL'; Expression = {$NodeUrl}}, `
+                    Version, `
+                    NetworkVersion, `
+                    Height, `
+                    FinalizedHeight, `
+                    Syncing, `
+                    UnconfirmedTransactions, `
+                    @{Name = 'ForgingInfo'; Expression = {$ForgingInfo}}
+}
+
+$NodeList | Format-Table
+
 
 ## Public Node
 
@@ -127,7 +175,14 @@ ForEach( $NodeUrl in $Config.PublicNode ) {
 
     $Node = Invoke-LiskApiCall -Method Get -URI $( $NodeUrl + 'api/node/info' )
 
-    $NodeList += $Node | Select-Object -Property @{Name = 'URL'; Expression = {$NodeUrl}}, Version, NetworkVersion, Height, FinalizedHeight, Syncing, UnconfirmedTransactions
+    $NodeList += $Node | Select-Object -Property `
+                    @{Name = 'URL'; Expression = {$NodeUrl}}, `
+                    Version, `
+                    NetworkVersion, `
+                    Height, `
+                    FinalizedHeight, `
+                    Syncing, `
+                    UnconfirmedTransactions
 }
 
 $NodeList | Format-Table
@@ -147,4 +202,4 @@ $PeerList = Invoke-LiskApiCall -Method Get -URI $( $Config.API + 'api/peers' ) |
 $TopHeight = $PeerList.Height | Sort-Object -Unique -Descending | Select-Object -First 1
 Write-Host "TopHeight : $TopHeight`r`n" -ForegroundColor White
 
-$PeerList | FT
+$PeerList | Format-Table
