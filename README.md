@@ -74,7 +74,7 @@ Click the link to view their current status.
 * SOON gr33ndrag0n - [https://testnet3-service.lisknode.io](https://testnet3-service.lisknode.io/api/status)
 * lemii - [https://testnet-service.lisktools.eu](https://testnet-service.lisktools.eu/api/status)
 * punkrock - [https://lisk-testnet-service.punkrock.me](https://lisk-testnet-service.punkrock.me/api/status)
-  
+
 ## Scripts
 
 ### Online Tool
