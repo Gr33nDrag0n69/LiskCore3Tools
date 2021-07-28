@@ -129,15 +129,26 @@ $DelegateList = @()
 ForEach( $AccountBinaryAddress in $Config.Delegate ) {
 
     $Account = Invoke-LiskApiCall -Method Get -URI $( $Config.API + 'api/accounts/'+$AccountBinaryAddress )
+
     $Forger = $ForgerList | Where-Object { $_.address -eq $AccountBinaryAddress }
     
-    $Account | Add-Member -MemberType NoteProperty -Name 'Forger' -Value $Forger
+    #$Account | Add-Member -MemberType NoteProperty -Name 'Forger' -Value $Forger
 
-    $DelegateList += $Account
+    $DelegateList += [PSCustomObject]@{
+        Address = $Account.address
+        Username = $Account.dpos.delegate.username
+        ConsecutiveMissedBlocks = $Account.dpos.delegate.consecutiveMissedBlocks
+        LastForgedHeight = $Account.dpos.delegate.lastForgedHeight
+        ConsensusParticipant = $Forger.isConsensusParticipant
+        NextForgingTime = $Forger.nextForgingTime
+    }
 }
 
 Write-Host "# Delegate`r`n" -ForegroundColor Cyan
-$DelegateList | ConvertTo-Json -Depth 99
+
+# Delegate
+
+$DelegateList | Format-Table
 Write-Host ''
 
 ## Node
