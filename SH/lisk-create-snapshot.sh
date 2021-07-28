@@ -3,12 +3,15 @@
 # Gr33nDrag0n
 # https://github.com/Gr33nDrag0n69/LiskCore3Tools
 
-OUTPUT_DIRECTORY="/opt/nginx/testnet3-snapshot.lisknode.io"
+OUTPUT_DIRECTORY="##LISK_SNAPSHOT_PATH##"
+#OUTPUT_DIRECTORY="/opt/nginx/testnet3-snapshot.lisknode.io"
 OUTPUT_GZIP_FILENAME="blockchain.db.tar.gz"
 OUTPUT_GZIP_FILEPATH="${OUTPUT_DIRECTORY}/${OUTPUT_GZIP_FILENAME}"
 OUTPUT_HASH_FILEPATH="${OUTPUT_DIRECTORY}/${OUTPUT_GZIP_FILENAME}.SHA256"
 
-DAYS_TO_KEEP="3" # Use 0 to disable the feature
+DAYS_TO_KEEP="##LISK_SNAPSHOT_DAYS_TO_KEEP##" # Use 0 to disable the feature
+#DAYS_TO_KEEP="3"
+
 #PM2_CONFIG="~/lisk-core.pm2.json"
 
 ### Function(s) #######################################################################################################
