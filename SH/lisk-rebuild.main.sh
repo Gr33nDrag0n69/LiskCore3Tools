@@ -3,7 +3,7 @@
 # Gr33nDrag0n
 # https://github.com/Gr33nDrag0n69/LiskCore3Tools
 
-URL="https://snapshot3.lisknode.io/blockchain.db.tar.gz"
+URL="https://snapshot.lisknode.io/blockchain.db.tar.gz"
 lisk-core blockchain:download --url $URL --output ~/
 pm2 stop lisk-core --silent && sleep 3
 lisk-core blockchain:import ~/blockchain.db.tar.gz --force
