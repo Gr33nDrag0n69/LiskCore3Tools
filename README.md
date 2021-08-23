@@ -46,7 +46,9 @@ Copy the address to use it as a base URL or click the link to view the current n
 
 ## WS (WebSocket) API
 
-Copy the address to use it as a base URL for your queries or use this helper tool I built to explore it: [Lisk WebSocket Explorer](https://wsexplorer.lisknode.io/)
+**Documentation: [WebSocket JSON 2.0 RPC API](https://lisk.com/documentation/lisk-service/references/rpc-api.html)**
+
+Copy the address to use it as a base URL or use this helper tool I built to explore it: [Lisk WebSocket Explorer](https://wsexplorer.lisknode.io/)
 
 * gr33ndrag0n - wss://api.lisknode.io/ws
 * lemii - wss://lisk-mainnet-api.punkrock.me/ws
