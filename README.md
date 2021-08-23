@@ -25,7 +25,7 @@ To use with [Lisk Desktop](https://github.com/LiskHQ/lisk-desktop/releases) soft
 
 **Documentation: [Lisk Service API](https://lisk.com/documentation/lisk-service/references/api.html)**
 
-* lisk.io - [https://service.lisk.io/api](https://service.lisk.io/api/status)
+* lisk.io - [https://service.lisk.io](https://service.lisk.io/api/status)
 * lemii - [https://mainnet-service.lisktools.eu](https://mainnet-service.lisktools.eu/api/status)
 * punkrock - [https://lisk-mainnet-service.punkrock.me](https://lisk-mainnet-service.punkrock.me/api/status)
 * corsaro - [https://lisk-mainnet-service.liskworld.info ](https://lisk-mainnet-service.liskworld.info/api/status)
