@@ -10,6 +10,7 @@ Misc. stuff related to lisk-core 3 network.
   - [WS (WebSocket) API](#ws-websocket-api)
   - [Scripts](#scripts)
     - [Bash](#bash)
+  - [Others](#others)
 
 # MainNet
 
@@ -20,7 +21,7 @@ Misc. stuff related to lisk-core 3 network.
 
 ## Lisk-Service
 
-To use with [Lisk Desktop](https://github.com/LiskHQ/lisk-desktop/releases) software or as the modern API endpoint. Copy the address to use it as a base URL or click the link to view the current status of the endpoint.
+To use with [Lisk Desktop](https://github.com/LiskHQ/lisk-desktop/releases) software or as the **modern API** endpoint. Copy the address to use it as a base URL or click the link to view the current status of the endpoint.
 
 * lisk.io - [https://service.lisk.io/api](https://service.lisk.io/api/status)
 * lemii - [https://mainnet-service.lisktools.eu](https://mainnet-service.lisktools.eu/api/status)
@@ -62,3 +63,7 @@ Copy the address to use it as a base URL or use this helper tool I built to expl
 * [Disable Delegate Forging](https://raw.githubusercontent.com/Gr33nDrag0n69/LiskCore3Tools/main/SH/lisk-forging-disable.sh)
 * [Create Snapshot](https://raw.githubusercontent.com/Gr33nDrag0n69/LiskCore3Tools/main/SH/lisk-create-snapshot.sh)
 * [Rebuild From Snapshot](https://raw.githubusercontent.com/Gr33nDrag0n69/LiskCore3Tools/main/SH/lisk-rebuild.main.sh)
+
+## Others
+
+* stellardynamic - [sidechainsolutions.io](https://sidechainsolutions.io/)
