@@ -44,7 +44,7 @@ Copy the address to use it as a base URL or click the link to view the current n
 **Documentation: [Lisk Core v3 API](https://lisk.io/documentation/lisk-core/v3/reference/api.html)**
 
 * gr33ndrag0n - [https://api.lisknode.io](https://api.lisknode.io/api/node/info)
-* lemii - [https://api.lisktools.eu](https://api.lisktools.eu/api/node/info)
+* lemii - [https://mainnet-api.lisktools.eu](https://mainnet-api.lisktools.eu/api/node/info)
 * punkrock - [https://lisk-mainnet-api.punkrock.me](https://lisk-mainnet-api.punkrock.me/api/node/info)
 
 ## WS (WebSocket) API
@@ -54,7 +54,7 @@ Copy the address to use it as a base URL or use this helper tool I built to expl
 **Documentation: [WebSocket JSON 2.0 RPC API](https://lisk.com/documentation/lisk-service/references/rpc-api.html)**
 
 * gr33ndrag0n - wss://api.lisknode.io/ws
-* lemii - wss://lisk-mainnet-api.punkrock.me/ws
+* lemii - wss://mainnet-api.lisktools.eu/ws
 * punkrock - wss://lisk-mainnet-api.punkrock.me/ws
 
 ## Scripts
