@@ -10,7 +10,6 @@ Misc. stuff related to lisk-core 3 network.
   - [WS (WebSocket) API](#ws-websocket-api)
   - [Scripts](#scripts)
     - [Bash](#bash)
-  - [Others](#others)
 - [TestNet](#testnet)
   - [Explorer](#explorer-1)
   - [Lisk-Service](#lisk-service-1)
@@ -20,6 +19,7 @@ Misc. stuff related to lisk-core 3 network.
   - [Scripts](#scripts-1)
     - [Bash](#bash-1)
     - [PowerShell](#powershell)
+- [Other Link(s)](#other-links)
 
 # MainNet
 
@@ -79,10 +79,6 @@ Copy the address to use it as a base URL or use this helper tool I built to expl
 * [Create Snapshot](https://raw.githubusercontent.com/Gr33nDrag0n69/LiskCore3Tools/main/SH/lisk-create-snapshot.sh)
 * [Rebuild From Snapshot](https://raw.githubusercontent.com/Gr33nDrag0n69/LiskCore3Tools/main/SH/lisk-rebuild.main.sh)
 
-## Others
-
-* stellardynamic - [sidechainsolutions.io](https://sidechainsolutions.io/)
-
 # TestNet
 
 ## Explorer
@@ -126,3 +122,7 @@ Copy the address to use it as a base URL or use this helper tool I built to expl
 ### PowerShell
 
 * [Test HTTP API PlugIn](https://github.com/Gr33nDrag0n69/LiskCore3Tools/blob/main/PS1/Test-LiskCoreAPI.ps1)
+
+# Other Link(s)
+
+* stellardynamic - [sidechainsolutions.io](https://sidechainsolutions.io/)
