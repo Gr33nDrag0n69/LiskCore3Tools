@@ -11,6 +11,15 @@ Misc. stuff related to lisk-core 3 network.
   - [Scripts](#scripts)
     - [Bash](#bash)
   - [Others](#others)
+- [TestNet](#testnet)
+  - [Explorer](#explorer-1)
+  - [Lisk-Service](#lisk-service-1)
+  - [Snapshot](#snapshot-1)
+  - [HTTP Legacy API](#http-legacy-api-1)
+  - [WS (WebSocket) API](#ws-websocket-api-1)
+  - [Scripts](#scripts-1)
+    - [Bash](#bash-1)
+    - [PowerShell](#powershell)
 
 # MainNet
 
@@ -38,6 +47,8 @@ Rebuild a lisk-core database from a blockchain snapshot (hourly automated backup
 **Guide:** [Rebuild Blockchain From Snapshot](https://github.com/Gr33nDrag0n69/LiskCore3Tools/blob/main/MD/RebuildBlockchainFromSnapshot.md)
 
 * gr33ndrag0n - [snapshot.lisknode.io](https://snapshot.lisknode.io/)
+
+**Alternate Guide & Server(s):** [sidechainsolutions.io](https://sidechainsolutions.io/snapshots)
 
 ## HTTP Legacy API
 
@@ -71,3 +82,47 @@ Copy the address to use it as a base URL or use this helper tool I built to expl
 ## Others
 
 * stellardynamic - [sidechainsolutions.io](https://sidechainsolutions.io/)
+
+# TestNet
+
+## Explorer
+
+* moosty - [LiskScan TestNet Explorer](https://testnet.liskscan.com/)
+
+## Lisk-Service
+
+* lisk.io - [https://testnet-service.lisk.io/api](https://testnet-service.lisk.io/api/status)
+* lemii - [https://testnet-service.lisktools.eu](https://testnet-service.lisktools.eu/api/status)
+* punkrock - [https://lisk-testnet-service.punkrock.me](https://lisk-testnet-service.punkrock.me/api/status)
+* stellardynamic - [https://testnet.liskapi.io](https://testnet.liskapi.io/api/status)
+
+## Snapshot
+
+* gr33ndrag0n - [testnet3-snapshot.lisknode.io](https://testnet3-snapshot.lisknode.io/)
+
+## HTTP Legacy API
+
+* gr33ndrag0n - [https://testnet3-api.lisknode.io](https://testnet3-api.lisknode.io/api/node/info)
+* lemii - [https://testnet-api.lisktools.eu](https://testnet-api.lisktools.eu/api/node/info)
+* punkrock - [https://lisk-testnet-api.punkrock.me](https://lisk-testnet-api.punkrock.me/api/node/info)
+
+## WS (WebSocket) API
+
+[Lisk TestNet WebSocket Explorer](https://testnet3-wsexplorer.lisknode.io/)
+
+* gr33ndrag0n - wss://testnet3-api.lisknode.io/ws
+* lemii - wss://testnet-api.lisktools.eu/ws
+* punkrock - wss://lisk-testnet-api.punkrock.me/ws
+
+## Scripts
+
+### Bash
+
+* [Enable Delegate Forging](https://raw.githubusercontent.com/Gr33nDrag0n69/LiskCore3Tools/main/SH/lisk-forging-enable.sh)
+* [Disable Delegate Forging](https://raw.githubusercontent.com/Gr33nDrag0n69/LiskCore3Tools/main/SH/lisk-forging-disable.sh)
+* [Create Snapshot](https://raw.githubusercontent.com/Gr33nDrag0n69/LiskCore3Tools/main/SH/lisk-create-snapshot.sh)
+* [Rebuild From Snapshot](https://raw.githubusercontent.com/Gr33nDrag0n69/LiskCore3Tools/main/SH/lisk-rebuild.test.sh)
+
+### PowerShell
+
+* [Test HTTP API PlugIn](https://github.com/Gr33nDrag0n69/LiskCore3Tools/blob/main/PS1/Test-LiskCoreAPI.ps1)
