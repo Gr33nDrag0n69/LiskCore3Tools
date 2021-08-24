@@ -33,7 +33,9 @@ To use with [Lisk Desktop](https://github.com/LiskHQ/lisk-desktop/releases) soft
 
 ## Snapshot
 
-To quickly rebuild a lisk-core database using this helper tool: [lisk-rebuild.main.sh](https://raw.githubusercontent.com/Gr33nDrag0n69/LiskCore3Tools/main/SH/lisk-rebuild.main.sh)
+Rebuild a lisk-core database from a blockchain snapshot (hourly automated backup)
+
+**Guide:** [Rebuild Blockchain From Snapshot](https://github.com/Gr33nDrag0n69/LiskCore3Tools/blob/main/MD/RebuildBlockchainFromSnapshot.md)
 
 * gr33ndrag0n - [snapshot.lisknode.io](https://snapshot.lisknode.io/)
 
