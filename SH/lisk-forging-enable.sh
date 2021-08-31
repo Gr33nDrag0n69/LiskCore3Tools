@@ -1,7 +1,11 @@
 #!/bin/bash
 
-# Gr33nDrag0n
+# Gr33nDrag0n - v1.1 2021-08-30
 # https://github.com/Gr33nDrag0n69/LiskCore3Tools
+
+# Save your encryption passphrase here to allow automatic enabling.
+# Leave it empty for normal behavior
+EncryptionPassphrase=""
 
 ForgingStatus=$( lisk-core forging:status )
 
@@ -14,28 +18,19 @@ for Delegate in $(echo "${ForgingStatus}" | jq -rc '.[]'); do
     then
         echo "$DelegateName is already forging."
     else
-        while true; do
-            read -p "Enable Forging on $DelegateName?" yn 
-            case $yn in
+        echo "Enabling forging on $DelegateName."
+        Height=$( echo $Delegate | jq -r '.height // 0' )
+        MaxHeightPreviouslyForged=$( echo $Delegate | jq -r '.maxHeightPreviouslyForged // 0' )
+        MaxHeightPrevoted=$( echo $Delegate | jq -r '.maxHeightPrevoted // 0' )
 
-                [Yy]* )
-                    Height=$( echo $Delegate | jq -r '.height // 0' )
-                    MaxHeightPreviouslyForged=$( echo $Delegate | jq -r '.maxHeightPreviouslyForged // 0' )
-                    MaxHeightPrevoted=$( echo $Delegate | jq -r '.maxHeightPrevoted // 0' )
-                    echo "lisk-core forging:enable $BinaryAddress $Height $MaxHeightPreviouslyForged $MaxHeightPrevoted"
-                    lisk-core forging:enable $BinaryAddress $Height $MaxHeightPreviouslyForged $MaxHeightPrevoted
-                    break
-                ;;
-
-                [Nn]* )
-                    break
-                    ;;
-
-                * )
-                    echo "Please answer yes or no."
-                    ;;
-            esac
-        done
+        if [ -z "$EncryptionPassphrase" ]
+        then
+            echo "lisk-core forging:enable $BinaryAddress $Height $MaxHeightPreviouslyForged $MaxHeightPrevoted"
+            lisk-core forging:enable $BinaryAddress $Height $MaxHeightPreviouslyForged $MaxHeightPrevoted
+        else
+            echo "lisk-core forging:enable $BinaryAddress $Height $MaxHeightPreviouslyForged $MaxHeightPrevoted --password ***************"
+            lisk-core forging:enable $BinaryAddress $Height $MaxHeightPreviouslyForged $MaxHeightPrevoted --password "$EncryptionPassphrase"
+        fi
     fi
 
 done
