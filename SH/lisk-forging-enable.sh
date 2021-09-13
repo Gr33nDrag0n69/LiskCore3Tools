@@ -68,24 +68,24 @@ do
 
             for Delegate in $(echo "${ForgingStatus}" | jq -rc '.[]'); do
 
-                BinaryAddress=$( echo $Delegate | jq -r '.address' )
-                Forging=$( echo $Delegate | jq -r '.forging' )
-                DelegateName=$( lisk-core account:get $BinaryAddress | jq -r '.dpos.delegate.username' )
+                BinaryAddress=$( echo "$Delegate" | jq -r '.address' )
+                Forging=$( echo "$Delegate" | jq -r '.forging' )
+                DelegateName=$( lisk-core account:get "$BinaryAddress" | jq -r '.dpos.delegate.username' )
                 if [ "$Forging" = true ]
                 then
                     echo "$DelegateName is already forging."
                 else
                     echo "Enabling forging on $DelegateName."
-                    Height=$( echo $Delegate | jq -r '.height // 0' )
-                    MaxHeightPreviouslyForged=$( echo $Delegate | jq -r '.maxHeightPreviouslyForged // 0' )
-                    MaxHeightPrevoted=$( echo $Delegate | jq -r '.maxHeightPrevoted // 0' )
+                    Height=$( echo "$Delegate" | jq -r '.height // 0' )
+                    MaxHeightPreviouslyForged=$( echo "$Delegate" | jq -r '.maxHeightPreviouslyForged // 0' )
+                    MaxHeightPrevoted=$( echo "$Delegate" | jq -r '.maxHeightPrevoted // 0' )
 
                     if [ -z "$EncryptionPassword" ]
                     then
                         echo "lisk-core forging:enable $BinaryAddress $Height $MaxHeightPreviouslyForged $MaxHeightPrevoted"
                         if [ "$Debug" = false ]
                         then
-                            lisk-core forging:enable $BinaryAddress $Height $MaxHeightPreviouslyForged $MaxHeightPrevoted
+                            lisk-core forging:enable "$BinaryAddress" "$Height" "$MaxHeightPreviouslyForged" "$MaxHeightPrevoted"
                         else
                             echo "DEBUG MODE is ON! Skipping 'lisk-core forging:enable' command execution."
                         fi
@@ -93,7 +93,7 @@ do
                         echo "lisk-core forging:enable $BinaryAddress $Height $MaxHeightPreviouslyForged $MaxHeightPrevoted --password ***************"
                         if [ "$Debug" = false ]
                         then
-                            lisk-core forging:enable $BinaryAddress $Height $MaxHeightPreviouslyForged $MaxHeightPrevoted --password "$EncryptionPassword"
+                            lisk-core forging:enable "$BinaryAddress" "$Height" "$MaxHeightPreviouslyForged" "$MaxHeightPrevoted" --password "$EncryptionPassword"
                         else
                             echo "DEBUG MODE is ON! Skipping 'lisk-core forging:enable' command execution."
                         fi
