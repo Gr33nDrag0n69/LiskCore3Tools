@@ -65,6 +65,11 @@ do
         exit 1
     else
 
+        if [ "$Debug" = true ]
+        then
+            echo "$NodeInfo" | jq -r '.'
+        fi
+        
         NodeSyncing=$( echo "$NodeInfo" | jq -r '.syncing' )
 
         if [ "$NodeSyncing" = false ]
