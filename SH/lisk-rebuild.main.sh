@@ -1,7 +1,13 @@
 #!/bin/bash
 
-# Gr33nDrag0n - v1.2.0 2021/09/12
-# https://github.com/Gr33nDrag0n69/LiskCore3Tools
+###############################################################################
+# Author  :   Gr33nDrag0n
+# Version :   1.2.0
+# GitHub  :   https://github.com/Gr33nDrag0n69/LiskCore3Tools
+# History :   2021/09/12 - v1.2.0
+#             2021/08/28 - v1.1.0
+#             2021/07/29 - v1.0.0
+###############################################################################
 
 LiskHQ_TopHeight=$( curl -s https://snapshots.lisk.io/main/ | sed -r 's/.*href="([^"]+).*/\1/g' | grep "blockchain-.*.db.tar.gz" | grep -v "SHA256"  | sed 's/[^0-9]*//g' | sort -nru | head -n1 )
 Gr33nDrag0n_TopHeight=$( curl -s https://snapshot.lisknode.io/ | sed -r 's/.*href="([^"]+).*/\1/g' | grep "blockchain-.*.db.tar.gz" | grep -v "SHA256"  | sed 's/[^0-9]*//g' | sort -nru | head -n1 )
