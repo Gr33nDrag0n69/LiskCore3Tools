@@ -10,15 +10,6 @@
 #             2021/07/28 - v1.0.0
 ###############################################################################
 
-# ChangeLog
-# - New WaitDelay internal parameter & associated code
-# - New RetryDelay internal parameter & associated code
-# - New Debug internal parameter & associated code
-# - New TopHeightUrl parameter & associated code
-# - Add validation of 'lisk-core node:info' value.
-# - Remove error on 'node sync'
-# - Add auto retry on 'node sync'
-
 # Save your encryption password here to allow automatic enabling.
 # Leave it empty for normal behavior
 EncryptionPassword=""
@@ -120,11 +111,11 @@ do
         else
             echo "Warning : Node is currently syncing. Retrying in $RetryDelay second(s)..."
         fi
-        
+
         echo "          CurrentTry: $CurrentTry | MaxRetry: $MaxRetry | Current Height: $NodeHeight | Top Height: $TopHeight"
         sleep $RetryDelay
         CurrentTry=$((CurrentTry+1))
-        
+
     fi
 done
 
