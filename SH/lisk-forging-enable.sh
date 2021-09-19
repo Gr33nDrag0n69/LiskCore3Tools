@@ -2,9 +2,10 @@
 
 ###############################################################################
 # Author  :   Gr33nDrag0n
-# Version :   1.3.0
+# Version :   1.3.1
 # GitHub  :   https://github.com/Gr33nDrag0n69/LiskCore3Tools
-# History :   2021/09/18 - v1.3.0
+# History :   2021/09/19 - v1.3.1
+#             2021/09/18 - v1.3.0
 #             2021/09/01 - v1.2.0
 #             2021/08/30 - v1.1.0
 #             2021/07/28 - v1.0.0
@@ -24,20 +25,9 @@ RetryDelay=180
 # Automation: Max number of retry, assuming 180 sec, default value is 1 hour long.
 MaxRetry=20
 
-# When lisk-core is syncing, topheight is calculated using this API URL.
-
-# gr33ndrag0n : https://api.lisknode.io/api/peers
-# lemii       : https://mainnet-api.lisktools.eu/api/peers
-# punkrock    : https://lisk-mainnet-api.punkrock.me/api/peers
-
-TopHeightUrl="https://api.lisknode.io/api/peers"
-
 # Developer: When set to true, skip 'lisk-core forging:enable' command execution.
 # For troubleshooting only.
 Debug=false
-
-# Patch: Hard coded minimum block height to start considering Syncing value only.
-MinHeight=16500000
 
 #------------------------------------------------------------------------------
 
@@ -46,6 +36,52 @@ then
     echo "Waiting $WaitDelay second(s) before execution."
     sleep $WaitDelay
 fi
+
+NetworkIdentifier=$( lisk-core node:info 2>/dev/null | jq -r '.networkIdentifier' )
+
+if [ -z "$NetworkIdentifier" ]
+then
+    echo "Error: 'lisk-core node:info' is empty. Validate the lisk-core process is currently running." >&2
+    exit 1
+fi
+
+case $NetworkIdentifier in
+    "4c09e6a781fc4c7bdb936ee815de8f94190f8a7519becd9de2081832be309a99")
+
+        # MAINNET
+
+        # TopHeight is calculated using this API URL.
+        # gr33ndrag0n : https://api.lisknode.io/api/peers
+        # lemii       : https://mainnet-api.lisktools.eu/api/peers
+        # punkrock    : https://lisk-mainnet-api.punkrock.me/api/peers
+
+        TopHeightUrl="https://api.lisknode.io/api/peers"
+
+        # Patch: Hard coded minimum block height to start considering Syncing value only.
+        MinHeight=16500000
+        ;;
+
+    "15f0dacc1060e91818224a94286b13aa04279c640bd5d6f193182031d133df7c")
+
+        # TESTNET
+
+        # TopHeight is calculated using this API URL.
+        # gr33ndrag0n : https://testnet3-api.lisknode.io/api/peers
+        # lemii       : https://testnet-api.lisktools.eu/api/peers
+        # punkrock    : https://lisk-testnet-api.punkrock.me/api/peers
+
+        TopHeightUrl="https://testnet3-api.lisknode.io/api/peers"
+
+        # Patch: Hard coded minimum block height to start considering Syncing value only.
+        MinHeight=14600000
+        ;;
+
+    *)
+        # Invalid Network
+        echo "Error: 'lisk-core node:info' NetworkIdentifier is INVALID." >&2
+        exit 1
+        ;;
+esac
 
 CurrentTry=1
 
