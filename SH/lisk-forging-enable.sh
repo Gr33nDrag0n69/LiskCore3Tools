@@ -45,6 +45,9 @@ TopHeightUrl="https://api.lisknode.io/api/peers"
 # For troubleshooting only.
 Debug=true
 
+# Patch: Hard coded minimum block height to start considering Syncing value only.
+MinHeight=16500000
+
 #------------------------------------------------------------------------------
 
 if [ $WaitDelay -gt 0 ]
@@ -64,65 +67,64 @@ do
         echo "Error: 'lisk-core node:info' is empty. Validate the lisk-core process is currently running." >&2
         exit 1
     else
-
-        if [ "$Debug" = true ]
-        then
-            echo "$NodeInfo" | jq -r '.'
-        fi
-        
         NodeSyncing=$( echo "$NodeInfo" | jq -r '.syncing' )
+        TopHeight=$( curl -s "$TopHeightUrl" | jq '.data[].options.height' | sort -nru | head -n1 )
 
         if [ "$NodeSyncing" = false ]
         then
-            ForgingStatus=$( lisk-core forging:status )
+            NodeHeight=$( echo "$NodeInfo" | jq -r '.height' )
 
-            for Delegate in $(echo "${ForgingStatus}" | jq -rc '.[]'); do
+            if [ "$NodeHeight" -gt "$MinHeight" ]
+            then
+                ForgingStatus=$( lisk-core forging:status )
 
-                BinaryAddress=$( echo "$Delegate" | jq -r '.address' )
-                Forging=$( echo "$Delegate" | jq -r '.forging' )
-                DelegateName=$( lisk-core account:get "$BinaryAddress" | jq -r '.dpos.delegate.username' )
-                if [ "$Forging" = true ]
-                then
-                    echo "$DelegateName is already forging."
-                else
-                    echo "Enabling forging on $DelegateName."
-                    Height=$( echo "$Delegate" | jq -r '.height // 0' )
-                    MaxHeightPreviouslyForged=$( echo "$Delegate" | jq -r '.maxHeightPreviouslyForged // 0' )
-                    MaxHeightPrevoted=$( echo "$Delegate" | jq -r '.maxHeightPrevoted // 0' )
+                for Delegate in $(echo "${ForgingStatus}" | jq -rc '.[]'); do
 
-                    if [ -z "$EncryptionPassword" ]
+                    BinaryAddress=$( echo "$Delegate" | jq -r '.address' )
+                    Forging=$( echo "$Delegate" | jq -r '.forging' )
+                    DelegateName=$( lisk-core account:get "$BinaryAddress" | jq -r '.dpos.delegate.username' )
+                    if [ "$Forging" = true ]
                     then
-                        echo "lisk-core forging:enable $BinaryAddress $Height $MaxHeightPreviouslyForged $MaxHeightPrevoted"
-                        if [ "$Debug" = false ]
-                        then
-                            lisk-core forging:enable "$BinaryAddress" "$Height" "$MaxHeightPreviouslyForged" "$MaxHeightPrevoted"
-                        else
-                            echo "DEBUG MODE is ON! Skipping 'lisk-core forging:enable' command execution."
-                        fi
+                        echo "$DelegateName is already forging."
                     else
-                        echo "lisk-core forging:enable $BinaryAddress $Height $MaxHeightPreviouslyForged $MaxHeightPrevoted --password ***************"
-                        if [ "$Debug" = false ]
+                        echo "Enabling forging on $DelegateName."
+                        Height=$( echo "$Delegate" | jq -r '.height // 0' )
+                        MaxHeightPreviouslyForged=$( echo "$Delegate" | jq -r '.maxHeightPreviouslyForged // 0' )
+                        MaxHeightPrevoted=$( echo "$Delegate" | jq -r '.maxHeightPrevoted // 0' )
+
+                        if [ -z "$EncryptionPassword" ]
                         then
-                            lisk-core forging:enable "$BinaryAddress" "$Height" "$MaxHeightPreviouslyForged" "$MaxHeightPrevoted" --password "$EncryptionPassword"
+                            echo "lisk-core forging:enable $BinaryAddress $Height $MaxHeightPreviouslyForged $MaxHeightPrevoted"
+                            if [ "$Debug" = false ]
+                            then
+                                lisk-core forging:enable "$BinaryAddress" "$Height" "$MaxHeightPreviouslyForged" "$MaxHeightPrevoted"
+                            else
+                                echo "DEBUG MODE is ON! Skipping 'lisk-core forging:enable' command execution."
+                            fi
                         else
-                            echo "DEBUG MODE is ON! Skipping 'lisk-core forging:enable' command execution."
+                            echo "lisk-core forging:enable $BinaryAddress $Height $MaxHeightPreviouslyForged $MaxHeightPrevoted --password ***************"
+                            if [ "$Debug" = false ]
+                            then
+                                lisk-core forging:enable "$BinaryAddress" "$Height" "$MaxHeightPreviouslyForged" "$MaxHeightPrevoted" --password "$EncryptionPassword"
+                            else
+                                echo "DEBUG MODE is ON! Skipping 'lisk-core forging:enable' command execution."
+                            fi
                         fi
                     fi
-                fi
 
-            done
-            exit 0
+                done
+                exit 0
+            else
+                echo "Warning : Node is currently in pre-syncing. Retrying in $RetryDelay second(s)..."
+            fi
         else
-            CurrentHeight=$( echo "$NodeInfo" | jq -r '.height' )
-            TopHeight=$( curl -s "$TopHeightUrl" | jq '.data[].options.height' | sort -nru | head -n1 )
-
             echo "Warning : Node is currently syncing. Retrying in $RetryDelay second(s)..."
-            echo "          CurrentTry: $CurrentTry | MaxRetry: $MaxRetry | Current Height: $CurrentHeight | Top Height: $TopHeight"
-
-            sleep $RetryDelay
-
-            CurrentTry=$((CurrentTry+1))
         fi
+        
+        echo "          CurrentTry: $CurrentTry | MaxRetry: $MaxRetry | Current Height: $NodeHeight | Top Height: $TopHeight"
+        sleep $RetryDelay
+        CurrentTry=$((CurrentTry+1))
+        
     fi
 done
 
