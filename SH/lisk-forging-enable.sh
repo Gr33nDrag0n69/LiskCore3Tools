@@ -1,9 +1,14 @@
 #!/bin/bash
 
-# Gr33nDrag0n - v1.3.0 -  2021/09/08
-# https://github.com/Gr33nDrag0n69/LiskCore3Tools
-
-# Disclaimer: I tested the code thoroughly but the lack of bugs cannot be guaranteed. USE AT YOUR OWN RISK!
+###############################################################################
+# Author  :   Gr33nDrag0n
+# Version :   1.3.0
+# GitHub  :   https://github.com/Gr33nDrag0n69/LiskCore3Tools
+# History :   2021/09/18 - v1.3.0
+#             2021/09/01 - v1.2.0
+#             2021/08/30 - v1.1.0
+#             2021/07/28 - v1.0.0
+###############################################################################
 
 # ChangeLog
 # - New WaitDelay internal parameter & associated code
@@ -104,14 +109,14 @@ do
             exit 0
         else
             CurrentHeight=$( echo "$NodeInfo" | jq -r '.height' )
-            TopHeight=$( curl -s "$TopHeightUrl" | jq '.data[].options.height' | sort -nrbu )
+            TopHeight=$( curl -s "$TopHeightUrl" | jq '.data[].options.height' | sort -nru | head -n1 )
 
             echo "Warning : Node is currently syncing. Retrying in $RetryDelay second(s)..."
             echo "          CurrentTry: $CurrentTry | MaxRetry: $MaxRetry | Current Height: $CurrentHeight | Top Height: $TopHeight"
 
             sleep $RetryDelay
 
-            CurrentTry=$((CurrentTry+1)) 
+            CurrentTry=$((CurrentTry+1))
         fi
     fi
 done
