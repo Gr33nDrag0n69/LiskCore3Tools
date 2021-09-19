@@ -34,7 +34,7 @@ TopHeightUrl="https://api.lisknode.io/api/peers"
 
 # Developer: When set to true, skip 'lisk-core forging:enable' command execution.
 # For troubleshooting only.
-Debug=true
+Debug=false
 
 # Patch: Hard coded minimum block height to start considering Syncing value only.
 MinHeight=16500000
