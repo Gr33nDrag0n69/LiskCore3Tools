@@ -2,9 +2,10 @@
 
 ###############################################################################
 # Author  :   Gr33nDrag0n
-# Version :   1.3.1
+# Version :   1.3.2
 # GitHub  :   https://github.com/Gr33nDrag0n69/LiskCore3Tools
-# History :   2021/09/19 - v1.3.1
+# History :   2021/09/20 - v1.3.2
+#             2021/09/19 - v1.3.1
 #             2021/09/18 - v1.3.0
 #             2021/09/01 - v1.2.0
 #             2021/08/30 - v1.1.0
@@ -14,6 +15,9 @@
 # Save your encryption password here to allow automatic enabling.
 # Leave it empty for normal behavior
 EncryptionPassword=""
+
+# Automation: Define full path of the lisk-core binary.
+LiskCoreBinaryFullPath="$HOME/lisk-core/bin/lisk-core"
 
 # Automation: Wait X seconds. Allow the lisk-core process to start before execution of this script.
 # If using this script with a cronjob, make sure to set this value to at least 3 seconds.
@@ -31,13 +35,19 @@ Debug=false
 
 #------------------------------------------------------------------------------
 
+if [ ! -f "$LiskCoreBinaryFullPath" ]
+then
+    echo "Error: lisk-core Binary NOT FOUND! Edit 'LiskCoreBinaryFullPath' value & retry. Aborting..." >&2
+    exit 1
+fi
+
 if [ $WaitDelay -gt 0 ]
 then
     echo "Waiting $WaitDelay second(s) before execution."
     sleep $WaitDelay
 fi
 
-NetworkIdentifier=$( lisk-core node:info 2>/dev/null | jq -r '.networkIdentifier' )
+NetworkIdentifier=$( "$LiskCoreBinaryFullPath" node:info 2>/dev/null | jq -r '.networkIdentifier' )
 
 if [ -z "$NetworkIdentifier" ]
 then
@@ -87,7 +97,7 @@ CurrentTry=1
 
 until [ $CurrentTry -gt $MaxRetry ]
 do
-    NodeInfo=$( lisk-core node:info 2>/dev/null )
+    NodeInfo=$( "$LiskCoreBinaryFullPath" node:info 2>/dev/null )
 
     if [ -z "$NodeInfo" ]
     then
@@ -103,13 +113,13 @@ do
 
             if [ "$NodeHeight" -gt "$MinHeight" ]
             then
-                ForgingStatus=$( lisk-core forging:status )
+                ForgingStatus=$( "$LiskCoreBinaryFullPath" forging:status )
 
                 for Delegate in $(echo "${ForgingStatus}" | jq -rc '.[]'); do
 
                     BinaryAddress=$( echo "$Delegate" | jq -r '.address' )
                     Forging=$( echo "$Delegate" | jq -r '.forging' )
-                    DelegateName=$( lisk-core account:get "$BinaryAddress" | jq -r '.dpos.delegate.username' )
+                    DelegateName=$( "$LiskCoreBinaryFullPath" account:get "$BinaryAddress" | jq -r '.dpos.delegate.username' )
                     if [ "$Forging" = true ]
                     then
                         echo "$DelegateName is already forging."
@@ -124,7 +134,7 @@ do
                             echo "lisk-core forging:enable $BinaryAddress $Height $MaxHeightPreviouslyForged $MaxHeightPrevoted"
                             if [ "$Debug" = false ]
                             then
-                                lisk-core forging:enable "$BinaryAddress" "$Height" "$MaxHeightPreviouslyForged" "$MaxHeightPrevoted"
+                                "$LiskCoreBinaryFullPath" forging:enable "$BinaryAddress" "$Height" "$MaxHeightPreviouslyForged" "$MaxHeightPrevoted"
                             else
                                 echo "DEBUG MODE is ON! Skipping 'lisk-core forging:enable' command execution."
                             fi
@@ -132,7 +142,7 @@ do
                             echo "lisk-core forging:enable $BinaryAddress $Height $MaxHeightPreviouslyForged $MaxHeightPrevoted --password ***************"
                             if [ "$Debug" = false ]
                             then
-                                lisk-core forging:enable "$BinaryAddress" "$Height" "$MaxHeightPreviouslyForged" "$MaxHeightPrevoted" --password "$EncryptionPassword"
+                                "$LiskCoreBinaryFullPath" forging:enable "$BinaryAddress" "$Height" "$MaxHeightPreviouslyForged" "$MaxHeightPrevoted" --password "$EncryptionPassword"
                             else
                                 echo "DEBUG MODE is ON! Skipping 'lisk-core forging:enable' command execution."
                             fi
