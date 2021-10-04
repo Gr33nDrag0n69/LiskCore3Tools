@@ -2,9 +2,10 @@
 
 ###############################################################################
 # Author  :   Gr33nDrag0n
-# Version :   1.3.2
+# Version :   1.4.0
 # GitHub  :   https://github.com/Gr33nDrag0n69/LiskCore3Tools
-# History :   2021/09/20 - v1.3.2
+# History :   2021/10/04 - v1.4.0
+#             2021/09/20 - v1.3.2
 #             2021/09/19 - v1.3.1
 #             2021/09/18 - v1.3.0
 #             2021/09/01 - v1.2.0
@@ -12,25 +13,15 @@
 #             2021/07/28 - v1.0.0
 ###############################################################################
 
+# Default Configuration
+
 # Save your encryption password here to allow automatic enabling.
-# Leave it empty for normal behavior
 EncryptionPassword=""
 
-# Automation: Define full path of the lisk-core binary.
 LiskCoreBinaryFullPath="$HOME/lisk-core/bin/lisk-core"
-
-# Automation: Wait X seconds. Allow the lisk-core process to start before execution of this script.
-# If using this script with a cronjob, make sure to set this value to at least 3 seconds.
 WaitDelay=0
-
-# Automation: If node is syncing, retry each X seconds.
 RetryDelay=180
-
-# Automation: Max number of retry, assuming 180 sec, default value is 1 hour long.
 MaxRetry=20
-
-# Developer: When set to true, skip 'lisk-core forging:enable' command execution.
-# For troubleshooting only.
 Debug=false
 
 #------------------------------------------------------------------------------
@@ -57,32 +48,14 @@ fi
 
 case $NetworkIdentifier in
     "4c09e6a781fc4c7bdb936ee815de8f94190f8a7519becd9de2081832be309a99")
-
         # MAINNET
-
-        # TopHeight is calculated using this API URL.
-        # gr33ndrag0n : https://api.lisknode.io/api/peers
-        # lemii       : https://mainnet-api.lisktools.eu/api/peers
-        # punkrock    : https://lisk-mainnet-api.punkrock.me/api/peers
-
         TopHeightUrl="https://api.lisknode.io/api/peers"
-
-        # Patch: Hard coded minimum block height to start considering Syncing value only.
         MinHeight=16500000
         ;;
 
     "15f0dacc1060e91818224a94286b13aa04279c640bd5d6f193182031d133df7c")
-
         # TESTNET
-
-        # TopHeight is calculated using this API URL.
-        # gr33ndrag0n : https://testnet3-api.lisknode.io/api/peers
-        # lemii       : https://testnet-api.lisktools.eu/api/peers
-        # punkrock    : https://lisk-testnet-api.punkrock.me/api/peers
-
         TopHeightUrl="https://testnet3-api.lisknode.io/api/peers"
-
-        # Patch: Hard coded minimum block height to start considering Syncing value only.
         MinHeight=14600000
         ;;
 
@@ -93,9 +66,92 @@ case $NetworkIdentifier in
         ;;
 esac
 
+### FUNCTIONS
+
+parse_option() {
+
+    while [[ $1 = -?* ]]
+    do
+        case "$1" in
+            -p | --password) shift; EncryptionPassword="${1}" ;;
+            -b | --binarypath) shift; LiskCoreBinaryFullPath="${1}" ;;
+            -w | --wait) shift; WaitDelay="${1}" ;;
+            -r | --retrydelay) shift; RetryDelay="${1}" ;;
+            -m | --maxretry) shift; MaxRetry="${1}" ;;
+            -a | --api) shift; TopHeightUrl="${1}" ;;
+            -h | --help) usage; exit 1 ;;
+            -d | --debug) Debug=true ;;
+            --endopts) shift; break ;;
+            *) echo "invalid option: '$1'."; exit 1 ;;
+            esac
+        shift
+    done
+}
+
+usage() {
+      cat <<EOF_USAGE
+Usage: $0 [-p "EncryptionPassword"] [-b "LiskCoreBinaryFullPath"] [-w WaitDelay] [-r RetryDelay] [-m MaxRetry] [-a "TopHeightUrl"] [-d]
+
+Available options:
+
+-p, --password "EncryptionPassword"
+
+    Encryption Password.
+    Default value: '$EncryptionPassword'.
+
+-b, --binarypath "LiskCoreBinaryFullPath"
+
+    Full path of the lisk-core binary.
+    Default value: '$LiskCoreBinaryFullPath'.
+
+-w, --wait WaitDelay
+
+    Automation: Wait X seconds. Allow the lisk-core process to start before execution of this script.
+    If using this script with a cronjob, make sure to set this value to at least 3 seconds.
+    Default value: '$WaitDelay'.
+
+-r, --retrydelay RetryDelay
+
+    Automation: If node is syncing, retry each X seconds.
+    Default value: '$RetryDelay'.
+
+-m, --maxretry MaxRetry
+
+    Automation: Max number of retry.
+    Default value: '$MaxRetry'.
+
+-a, --api "TopHeightUrl"
+
+    The script check for TopHeight using this API URL.
+    Default value: '$TopHeightUrl'.
+
+    Public nodes:
+
+        # Main Net
+        gr33ndrag0n : https://api.lisknode.io/api/peers
+        lemii       : https://mainnet-api.lisktools.eu/api/peers
+        punkrock    : https://lisk-mainnet-api.punkrock.me/api/peers
+
+        # Test Net
+        gr33ndrag0n : https://testnet3-api.lisknode.io/api/peers
+        lemii       : https://testnet-api.lisktools.eu/api/peers
+        punkrock    : https://lisk-testnet-api.punkrock.me/api/peers
+
+-d, --debug
+
+    Developer: Enable DEBUG mode. Skip 'lisk-core forging:enable' command execution.
+
+EOF_USAGE
+
+}
+
+### MAIN CODE
+
+parse_option "$@"
+
 CurrentTry=1
 
-until [ $CurrentTry -gt $MaxRetry ]
+until [ "$CurrentTry" -gt "$MaxRetry" ]
 do
     NodeInfo=$( "$LiskCoreBinaryFullPath" node:info 2>/dev/null )
 
@@ -129,26 +185,38 @@ do
                         MaxHeightPreviouslyForged=$( echo "$Delegate" | jq -r '.maxHeightPreviouslyForged // 0' )
                         MaxHeightPrevoted=$( echo "$Delegate" | jq -r '.maxHeightPrevoted // 0' )
 
-                        if [ -z "$EncryptionPassword" ]
+                        if [ "$Height" -gt 0 ] && [ "$MaxHeightPreviouslyForged" -gt 0 ] && [ "$MaxHeightPrevoted" -gt 0 ]
                         then
-                            echo "lisk-core forging:enable $BinaryAddress $Height $MaxHeightPreviouslyForged $MaxHeightPrevoted"
-                            if [ "$Debug" = false ]
+                            if [ -z "$EncryptionPassword" ]
                             then
-                                "$LiskCoreBinaryFullPath" forging:enable "$BinaryAddress" "$Height" "$MaxHeightPreviouslyForged" "$MaxHeightPrevoted"
+                                echo "lisk-core forging:enable $BinaryAddress $Height $MaxHeightPreviouslyForged $MaxHeightPrevoted"
+                                if [ "$Debug" = false ]
+                                then
+                                    "$LiskCoreBinaryFullPath" forging:enable "$BinaryAddress" "$Height" "$MaxHeightPreviouslyForged" "$MaxHeightPrevoted"
+                                else
+                                    echo "DEBUG MODE is ON! Skipping 'lisk-core forging:enable' command execution."
+                                fi
                             else
-                                echo "DEBUG MODE is ON! Skipping 'lisk-core forging:enable' command execution."
+                                echo "lisk-core forging:enable $BinaryAddress $Height $MaxHeightPreviouslyForged $MaxHeightPrevoted --password ***************"
+                                if [ "$Debug" = false ]
+                                then
+                                    "$LiskCoreBinaryFullPath" forging:enable "$BinaryAddress" "$Height" "$MaxHeightPreviouslyForged" "$MaxHeightPrevoted" --password "$EncryptionPassword"
+                                else
+                                    echo "DEBUG MODE is ON! Skipping 'lisk-core forging:enable' command execution."
+                                fi
                             fi
                         else
-                            echo "lisk-core forging:enable $BinaryAddress $Height $MaxHeightPreviouslyForged $MaxHeightPrevoted --password ***************"
-                            if [ "$Debug" = false ]
-                            then
-                                "$LiskCoreBinaryFullPath" forging:enable "$BinaryAddress" "$Height" "$MaxHeightPreviouslyForged" "$MaxHeightPrevoted" --password "$EncryptionPassword"
-                            else
-                                echo "DEBUG MODE is ON! Skipping 'lisk-core forging:enable' command execution."
-                            fi
+                            echo "Warning: (POM Protection) The current values countain a 0 value at least for one parameter."
+                            echo ''
+                            echo "You should use '0 0 0' ONLY IF you enable forging for a delegate that never forged any block."
+                            echo ''
+                            echo "If it's the case, manually run:"
+                            echo "lisk-core forging:enable $BinaryAddress 0 0 0"
+                            echo ''
+                            echo "If it's NOT the case, the local forger.db is empty and invalid."
+                            echo "Import a backup of your delegate 'forger-info' before enabling forging on this server."
                         fi
                     fi
-
                 done
                 exit 0
             else
@@ -159,7 +227,7 @@ do
         fi
 
         echo "          CurrentTry: $CurrentTry | MaxRetry: $MaxRetry | Current Height: $NodeHeight | Top Height: $TopHeight"
-        sleep $RetryDelay
+        sleep "$RetryDelay"
         CurrentTry=$((CurrentTry+1))
 
     fi
