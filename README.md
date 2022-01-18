@@ -90,7 +90,6 @@ Copy the address to use it as a base URL or use this helper tool I built to expl
 
 * lisk.io - [https://testnet-service.lisk.io/api](https://testnet-service.lisk.io/api/status)
 * lemii - [https://testnet-service.lisktools.eu](https://testnet-service.lisktools.eu/api/status)
-* punkrock - [https://lisk-testnet-service.punkrock.me](https://lisk-testnet-service.punkrock.me/api/status)
 * stellardynamic - [https://testnet.liskapi.io](https://testnet.liskapi.io/api/status)
 
 ## Snapshot
@@ -101,7 +100,6 @@ Copy the address to use it as a base URL or use this helper tool I built to expl
 
 * gr33ndrag0n - [https://testnet3-api.lisknode.io](https://testnet3-api.lisknode.io/api/node/info)
 * lemii - [https://testnet-api.lisktools.eu](https://testnet-api.lisktools.eu/api/node/info)
-* punkrock - [https://lisk-testnet-api.punkrock.me](https://lisk-testnet-api.punkrock.me/api/node/info)
 
 ## WS (WebSocket) API
 
@@ -109,7 +107,6 @@ Copy the address to use it as a base URL or use this helper tool I built to expl
 
 * gr33ndrag0n - wss://testnet3-api.lisknode.io/ws
 * lemii - wss://testnet-api.lisktools.eu/ws
-* punkrock - wss://lisk-testnet-api.punkrock.me/ws
 
 ## Scripts
 
